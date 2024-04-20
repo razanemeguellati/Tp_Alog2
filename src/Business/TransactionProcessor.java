@@ -68,6 +68,7 @@ public class TransactionProcessor implements ITransactionProcessor {
 
         return true;
     }
+
     public boolean AddStockItem(String codeItem, String idcategory, float price) {
         // Retrieve the category by its ID
         ItemCategory category = StoreClass.getCategoryById(idcategory);
@@ -75,9 +76,7 @@ public class TransactionProcessor implements ITransactionProcessor {
             return false; // Category not found, return false
         }
 
-        // Create a new StockItem object
         StockItem newStockItem = new StockItem(codeItem, false, category, price);
-
         // Add the new stock item to the store
         StoreClass.addStockItem(newStockItem);
 
@@ -88,6 +87,7 @@ public class TransactionProcessor implements ITransactionProcessor {
 
         return true;
     }
+
     public boolean removeStockItem(String codeitem) {
         // Retrieve the item by its code from the stock items map
         Map<String, StockItem> stockItems = StoreClass.getStockItems();
@@ -111,7 +111,6 @@ public class TransactionProcessor implements ITransactionProcessor {
         }
     }
 
-
     public boolean AddCategoryItem(String idcat, String designation, String marque, int quantity) {
         // Create a new ItemCategory object
         ItemCategory category = new ItemCategory(idcat, designation, marque, quantity);
@@ -125,7 +124,6 @@ public class TransactionProcessor implements ITransactionProcessor {
             return true; // Category successfully added
         }
     }
-
 
     public boolean removeCategoryItem(String idcategory) {
         // Find the category by its ID
@@ -149,7 +147,6 @@ public class TransactionProcessor implements ITransactionProcessor {
             return false; // Category not found
         }
     }
-
 
     public boolean AddClient(double accountBalance, String name, String clientId) {
         // Check if the client already exists

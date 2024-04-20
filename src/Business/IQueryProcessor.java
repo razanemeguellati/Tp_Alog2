@@ -10,12 +10,12 @@ import java.util.List;
 
 
     public interface IQueryProcessor {
-        //1 . getAllitems
+        //1. getAllitems
         public static Map<String, StockItem> getStockItems() {
             return StoreClass.getStockItems();
         }
 
-        //2 . getRenteditems
+        //2. getRenteditems
          static List <RentedItem> getAllRentedItems() {
             return StoreClass.getRentedItems();
         }
@@ -24,11 +24,10 @@ import java.util.List;
         List<RentedItem> getRentedItemByClient(String cltId);
 
         //4. SoldeClient
-        public float SoldeClient(Client client);
+        public float SoldeClient(String clientId);
 
         //5. OverdueItems
-        public List<RentedItem> OverdueItems(Client client);
+        public List<RentedItem> OverdueItems(String clientId);
 
-
-    }
+}
 

@@ -21,19 +21,19 @@ public class Gui{
         boolean running = true;
 
         while (running) {
-            System.out.println("Welcome to Equipment Rental System");
+            System.out.println("~~~~~~~~~~~~~~~ Interface Vendeur ~~~~~~~~~~~~~~");
             System.out.println("1. List all equipments");
             System.out.println("2. List non rented Equipements ");
             System.out.println("3. List of rented equipments for a specific client");
             System.out.println("4. Check client balance and overdue equipments");
-            System.out.println("5. Rent equipment to a client");
-            System.out.println("6. Return equipment by a client");
+            System.out.println("5. Checkout, Rent equipment to a client");
+            System.out.println("6. CheckiIn, Return equipment by a client");
             System.out.println("7. Add equipment to stock");
             System.out.println("8. Add new client");
             System.out.println("9. Add Category");
             System.out.println("10. Update equipment catalog");
             System.out.println("11. Show List of All Clients: ");
-
+            System.out.println("12. Show List of All Categories: ");
             System.out.println("0. Exit");
 
             System.out.print("Enter your choice: ");
@@ -42,6 +42,7 @@ public class Gui{
             switch (choice) {
 
                 case 1:
+                    // list of all equipments
                     Map<String, StockItem> stockItems = QueryProcessor.getStockItems();
 
                     for (Map.Entry<String, StockItem> entry : stockItems.entrySet()) {
@@ -91,7 +92,29 @@ public class Gui{
 
                     break;
 
+
                 case 4:
+                    System.out.println("4. Check client balance and overdue equipments");
+                    System.out.println("Enter client ID:");
+                    String clientId1 = scanner.nextLine();
+
+                    // Check client balance
+                    float clientBalance = queryProcessor.SoldeClient(clientId1);
+                    if (clientBalance != -1) {
+                        System.out.println("Client balance: " + clientBalance);
+                    } else {
+                        System.out.println("Client not found.");
+                    }
+                    // Check overdue equipments
+                    List<RentedItem> overdueItems = queryProcessor.OverdueItems(clientId1);
+                    if (!overdueItems.isEmpty()) {
+                        System.out.println("Overdue equipments:");
+                        for (RentedItem item : overdueItems) {
+                            System.out.println("Item: " + item.getStock().getCodeItem() + ", Due Date: " + item.getDueDate());
+                        }
+                    } else {
+                        System.out.println("No overdue equipments for this client.");
+                    }
                     break;
 
                 case 5:
@@ -107,7 +130,7 @@ public class Gui{
 
 
                 case 7:
-                    // Adding a new equipement to stock
+                    // Adding a new equipment to stock
                     System.out.println("7. - - Add equipment to stock");
                     // Create a Scanner object to read user input
                     Scanner scanner_stock= new Scanner(System.in);
@@ -122,15 +145,17 @@ public class Gui{
                     System.out.print("Enter price: ");
                     float price = scanner_stock.nextFloat();
 
-                    transactionProcessor.AddStockItem(codeItem, idcategory, price);
+                    boolean itemAdded = transactionProcessor.AddStockItem(codeItem, idcategory, price);
 
+                    if (itemAdded) {
+                        System.out.println("Category Added successfully");
+                    }
                     break;
 
 
                 case 8:
                     //Adding a new client
                     System.out.println("- - - - - Add new client - - - - ");
-
                     System.out.print("Enter Client Id:");
                     String c_Id = scanner.next();
                     System.out.print("Enter Client name:");
@@ -142,8 +167,8 @@ public class Gui{
                     if (isAdded) {
                         System.out.println("Client Added successfully");
                     }
-
                     break;
+
 
                 case 9:
                     // Create a new category
@@ -161,17 +186,23 @@ public class Gui{
                     System.out.print("Enter quantity: ");
                     int quantity = sc_cat.nextInt();
                     // Call the AddCategoryItem method with the user input parameters
-                    transactionProcessor.AddCategoryItem(idcat, designation, marque, quantity);
+                    boolean catAdded = transactionProcessor.AddCategoryItem(idcat, designation, marque, quantity);
 
+                    if (catAdded) {
+                        System.out.println("Client Added successfully");
+                    }
                     break;
 
-                case 10:
 
+
+                case 10:
                       //  Update equipment catalog
                     break;
 
+
+
                 case 11:
-                    // Iterate through the map and print each key-value pair
+                    // List of All clients
                     System.out.println(" List of all clients: ");
                     for (Map.Entry<String, Client> entry : StoreClass.getClients().entrySet()) {
                         String ccid = entry.getKey();
@@ -186,11 +217,35 @@ public class Gui{
                     }
                     break;
 
+
+
+                case 12:
+                    // Get the list of categories
+                    List<ItemCategory> categories = StoreClass.getCategories();
+
+                    // Iterate through the list of categories
+                    for (ItemCategory category : categories) {
+                        System.out.println("------------------------");
+                        System.out.println("Category ID: " + category.getIdcat());
+                        System.out.println("Category Designation: " + category.getDesignation());
+                        System.out.println("Category Marque: " + category.getMarque());
+                        System.out.println("Category Quantity: " + category.getQuantity());
+                        // Add other attributes if needed
+                        System.out.println("------------------------");
+                    }
+
+                    break;
+
+                case 13:
+                    //initialisations (Remplir la base de donnees)
+
+                    break;
                 case 0:
                     running = false;
                     break;
+
                 default:
-                    System.out.println("Invalid choice. Please enter a number between 0 and 9.");
+                    System.out.println("Invalid choice. Please enter a number between 0 and 15.");
             }
         }
 

@@ -6,7 +6,6 @@ import presentation.Gui;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Razane");
         QueryProcessor qp = new QueryProcessor();
         TransactionProcessor tp = new TransactionProcessor();
         Gui gui = new Gui(qp,tp);

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 public class StoreClass {
+    // une classe qui va contenir tous les structures de donnees
     private static Map<String, Client> clients = new HashMap<>();
     private static Map<String, StockItem> stockItems = new HashMap<>();
     private static List<RentedItem> rentedItems = new ArrayList<>();

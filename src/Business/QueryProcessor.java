@@ -20,11 +20,12 @@ public class QueryProcessor implements IQueryProcessor {
         return StoreClass.getStockItems();
     }
     @Override
-    public float SoldeClient(Client client) {
+    public float SoldeClient(String clientId) {
+
         Map<String, Client> allClients = StoreClass.getClients();
 
         // Find the client by ID
-        Client foundClient = allClients.get(client.getClientId());
+        Client foundClient = allClients.get(clientId);
 
         if (foundClient != null) {
             return (float) foundClient.getAccountBalance();
@@ -48,13 +49,13 @@ public class QueryProcessor implements IQueryProcessor {
     }
 
     @Override
-    public List<RentedItem> OverdueItems(Client client) {
+    public List<RentedItem> OverdueItems(String clientId) {
         List<RentedItem> overdueRentedItems = new ArrayList<>();
         List<RentedItem> allRentedItems = StoreClass.getRentedItems();
         Date today = new Date(); // Get the current date
 
         for (RentedItem rentedItem : allRentedItems) {
-            if (rentedItem.getDueDate().before(today)) {
+            if (rentedItem.getClient().getClientId().equals(clientId) && rentedItem.getDueDate().before(today)) {
                 overdueRentedItems.add(rentedItem);
             }
         }
