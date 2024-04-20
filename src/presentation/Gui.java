@@ -36,7 +36,7 @@ public class Gui{
             System.out.println("12. Show List of All Categories: ");
             System.out.println("0. Exit");
 
-            System.out.print("Enter your choice: ");
+            System.out.print("Choose From the menu: ");
             int choice = scanner.nextInt();
 
             switch (choice) {
@@ -58,7 +58,7 @@ public class Gui{
 
 
                 case 2:
-
+                    // to be imlemented : list of non rented equipements
 
                     break;
 
@@ -116,6 +116,8 @@ public class Gui{
                         System.out.println("No overdue equipments for this client.");
                     }
                     break;
+
+
 
                 case 5:
                     // Rent equipment to a client
@@ -236,21 +238,23 @@ public class Gui{
 
                     break;
 
+
                 case 13:
                     //initialisations (Remplir la base de donnees)
-
                     break;
+
+
                 case 0:
                     running = false;
                     break;
 
                 default:
-                    System.out.println("Invalid choice. Please enter a number between 0 and 15.");
+                    System.out.println(" error in input ");
             }
         }
 
 
-        System.out.println("Exiting Equipment Rental System. Goodbye!");
+        System.out.println(" Fin de programme ");
     }
 
 
